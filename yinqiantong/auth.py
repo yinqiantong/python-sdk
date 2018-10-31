@@ -79,7 +79,7 @@ class Auth(object):
             data['appid'] = self.__app_id
         sign = self.create_sign(data)
         data['sign'] = sign
-        (code, data_str) = http_post_json('https://yqtapi.com/order', data)
+        (code, data_str) = http_post_json('https://api.yqtapi.com/order', data)
         res_data = json.loads(data_str)
         if res_data and res_data['data'] and res_data['code'] == 200:
             data['pay_body'] = res_data['data']['pay_body']
@@ -89,12 +89,12 @@ class Auth(object):
         return res_data
 
     def get_order_state_by_out_trade_no(self, out_trade_no):
-        (code, data_str) = http_get('https://yqtapi.com/order?appid=%s&out_trade_no=%s' % (self.__app_id, out_trade_no))
+        (code, data_str) = http_get('https://api.yqtapi.com/order?appid=%s&out_trade_no=%s' % (self.__app_id, out_trade_no))
         res_data = json.loads(data_str)
         return res_data
 
     def get_order_state_by_client_out_trade_no(self, client_out_trade_no):
         (code, data_str) = http_get(
-            'https://yqtapi.com/order?appid=%s&client_out_trade_no=%s' % (self.__app_id, client_out_trade_no))
+            'https://api.yqtapi.com/order?appid=%s&client_out_trade_no=%s' % (self.__app_id, client_out_trade_no))
         res_data = json.loads(data_str)
         return res_data
